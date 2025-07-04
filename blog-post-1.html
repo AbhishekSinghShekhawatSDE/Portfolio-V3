@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Key DevOps Principles I Learned During My Internship | Abhishek Singh Shekhawat</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AbhishekSinghShekhawatSDE/Portfolio/530c101ed4ff7d90ea878eb8e401a937d7e8f539/assets/favicon1.png">
+    <meta name="description" content="A personal reflection on the five most impactful DevOps principles learned during a real-world internship, from infrastructure as code to the importance of observability.">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <canvas id="quantum-canvas" class="quantum-canvas"></canvas>
+    <a href="#main-content" class="skip-to-content-link">Skip to main content</a>
+    <div class="cursor-outline"></div>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo code-style-logo">
+                <span class="logo-code-keyword">#include</span><span class="logo-code-bracket"><</span><span class="logo-code-filename">Abhishek</span><span class="logo-code-extension">.h</span><span class="logo-code-bracket">></span>
+            </a>
+            <div class="header-right-group">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html" class="active">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="expertise.html">Expertise</a></li>
+                    </ul>
+                </nav>
+                <a href="contact.html" class="btn btn-nav-contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+           <main id="main-content">
+        <!-- THIS NEW HERO SECTION FIXES THE SPACING ISSUE PERMANENTLY -->
+        <section class="page-hero fade-in-element">
+            <div class="container">
+                <p class="blog-post-meta" style="color: var(--color-primary);"><span>DevOps</span></p>
+                <h1 class="page-title">5 Key DevOps Principles I Learned During My Internship</h1>
+                <p class="page-subtitle"><time datetime="2024-05-20">Published on May 20, 2024</time></p>
+            </div>
+        </section>
+
+        <article class="blog-post-layout fade-in-element">
+            <div class="container">
+                <div class="blog-post-grid">
+                    <!-- Main Content Column -->
+                    <div class="blog-post-main-content">
+                        <figure class="blog-post-figure">
+                            <img src="assets/photos/imgg1.jpg" alt="Abstract illustration of a CI/CD pipeline and DevOps tools.">
+                            <figcaption>Moving from academic theory to real-world application.</figcaption>
+                        </figure>
+                        
+                        <div class="blog-post-body">
+                            <p>University coursework gives you a solid foundation, but nothing prepares you for the realities of software delivery like a real-world internship. During my time as a DevOps & Cloud Intern, I moved beyond textbook definitions and saw firsthand how core DevOps principles translate into tangible improvements in efficiency, reliability, and speed. Here are the five most impactful lessons that truly clicked for me.</p>
+                            
+                            <h2>1. Infrastructure as Code (IaC) is Non-Negotiable</h2>
+                            <p>I had heard of tools like Terraform, but I didn't grasp their power until I saw them in action. Manually provisioning cloud resources is slow, error-prone, and impossible to track. IaC treats your infrastructure—servers, databases, networks—like application code. It's versioned, repeatable, and automated. This was a paradigm shift; we weren't just "setting up servers," we were engineering a reproducible system.</p>
+                            
+                            <h2>2. The CI/CD Pipeline is the Heart of the Operation</h2>
+                            <p>A well-architected CI/CD pipeline (we used GitHub Actions) is the central nervous system of a modern development team. It’s not just a tool for deployment; it's a quality gate. Every single commit automatically triggered a series of builds, tests, and security scans. This meant feedback was immediate. A bug wasn't something you found weeks later; it was caught within minutes. This relentless automation builds a culture of quality and confidence.</p>
+
+                            <h2>3. Containers (Docker) Solve "It Works On My Machine"</h2>
+                            <p>The classic developer excuse simply disappears with containerization. By packaging our applications and their dependencies into lightweight, portable Docker containers, we ensured that the environment was identical everywhere—from a developer's laptop to the staging server to production on AWS. This eliminated a massive category of deployment-related bugs and streamlined the entire workflow.</p>
+
+                            <h2>4. Observability is More Than Just "Monitoring"</h2>
+                            <p>Before my internship, I thought of monitoring as just checking if a server was up or down. I learned that true observability is about understanding the *why*. It's about collecting detailed logs, metrics, and traces that allow you to ask complex questions about your system's behavior. When something went wrong, we didn't just see an error; we had the data to trace its origin and understand its impact, which is crucial for building resilient systems.</p>
+
+                            <h2>5. Security is Everyone's Job (DevSecOps)</h2>
+                            <blockquote>The most important shift was understanding that security isn't a final step; it's a continuous process integrated into every stage of the pipeline.</blockquote>
+                            <p>We practiced "shifting left," which means incorporating security checks as early as possible. We had automated tools that scanned our code for vulnerabilities, checked our Docker images for known issues, and enforced security policies on our cloud infrastructure. This DevSecOps mindset ensures that security is a shared responsibility, not an afterthought.</p>
+
+                            <h3>Conclusion</h3>
+                            <p>My internship was an invaluable experience that bridged the gap between academic knowledge and professional practice. These five principles are now core to my own engineering philosophy, and they've solidified my passion for building robust, secure, and efficient systems in the cloud.</p>
+                        </div>
+                    </div>
+                    <!-- Sidebar Column (UPDATED) -->
+                    <aside class="blog-post-sidebar">
+                        <div class="sidebar-widget inertial-card">
+                            <h4>About The Author</h4>
+                            <img src="assets/Abhishek.png" alt="Abhishek Singh Shekhawat" class="author-pic">
+                            <div class="author-info">
+                                <strong>Abhishek Singh Shekhawat</strong>
+                                <span>DevOps & Cloud Engineer</span>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget inertial-card">
+                            <h4>All Posts</h4>
+                            <ul class="recent-posts-list">
+                                <li><a href="blog-post-1.html" class="active-post">5 Key DevOps Principles</a></li>
+                                <li><a href="blog-post-2.html">How I Built a Serverless Form</a></li>
+                                <li><a href="#">From Idea to URL: SayItForYou.fun</a></li>
+                                
+                            </ul>
+                        </div>
+                         <div class="sidebar-widget inertial-card">
+                            <h4>Explore More</h4>
+                            <ul class="recent-posts-list">
+                                <li><a href="projects.html" class="link-arrow">View My Projects →</a></li>
+                                <li><a href="expertise.html" class="link-arrow">See My Full Expertise →</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about"><h4 class="footer-column-title">Abhishek Singh Shekhawat</h4><p>DevOps & Cloud Engineer crafting digital solutions with passion and precision. Based in India<img src="assets/flag/india.png" alt="Flag of India" class="waving-flag">.</p></div>
+                <div class="footer-column"><h4 class="footer-column-title">Quick Links</h4><ul><li><a href="about.html">About</a></li><li><a href="projects.html">Projects</a></li><li><a href="expertise.html">Expertise</a></li><li><a href="resume.html">Resume</a></li></ul></div>
+                <div class="footer-column"><h4 class="footer-column-title">Get In Touch</h4><ul><li><a href="mailto:abhisheksinghshekhawat63@gmail.com">Email Me</a></li><li><a href="tel:+919928130195">Call Me</a></li><li><a href="https://wa.me/919928130195" target="_blank" rel="noopener noreferrer">WhatsApp</a></li></ul></div>
+                <div class="footer-column"><h4 class="footer-column-title">Connect</h4><ul><li><a href="https://github.com/abhisheksinghshekhawatsde" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/abhisheksinghshekhawat/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="https://leetcode.com/u/abhisheksinghshekhawat63/" target="_blank" rel="noopener noreferrer">LeetCode</a></li><li><a href="https://x.com/TechLearnerAbhi" target="_blank" rel="noopener noreferrer">Twitter (X)</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© <span id="copyright-year"></span> Abhishek Singh Shekhawat. Designed & Developed by Me.</p></div>
+        </div>
+    </footer>
+    
+<script src="js/script.js"></script>
+</body>
+</html>
