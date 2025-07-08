@@ -25,7 +25,7 @@ This project was built with a focus on modern web standards and professional eng
 
 This diagram illustrates the high-level architecture of the platform, from the user's browser to the serverless backend.
 
-![Architecture Diagram](assets/Abhishek Singh Shekhawat _ DevOps & Cloud Engineer - Google Chrome 08-07-2025 20_09_34.png)
+![Architecture Diagram](assets/preview.png)
 
 ### Performance & Security
 
