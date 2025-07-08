@@ -1,6 +1,7 @@
 # Portfolio V3 - Abhishek Singh Shekhawat
 
-![Performance & Security Audit](assets/zxcv.png)(assets/asdf.png)
+![Performance & Security Audit](assets/asdf.png)
+![Performance & Security Audit](assets/zxcv.png)
 
 This repository contains the source code for my personal portfolio and professional platform, available at **[www.abhisheksinghshekhawat.com](https://www.abhisheksinghshekhawat.com/)**.
 
