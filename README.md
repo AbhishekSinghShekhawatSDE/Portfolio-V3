@@ -1,6 +1,6 @@
 # Portfolio V3 - Abhishek Singh Shekhawat
 
-[![Performance & Security Audit](httpshttps://www.abhisheksinghshekhawat.com/assets/SocialPreviews/proof-of-perfection.png)](https://www.abhisheksinghshekhawat.com/)
+[![Performance & Security Audit](assets/qwerty.png)
 
 This repository contains the source code for my personal portfolio and professional platform, available at **[www.abhisheksinghshekhawat.com](https://www.abhisheksinghshekhawat.com/)**.
 
