@@ -21,9 +21,6 @@ This project was engineered from the ground up not just as a static page, but as
 
 This project was built with a focus on modern web standards and professional engineering practices.
 
-### Architecture Diagram
-
-This diagram illustrates the high-level architecture of the platform, from the user's browser to the serverless backend.
 
 ![Architecture Diagram](assets/preview.png)
 
