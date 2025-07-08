@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ============================================= -->
+  <!--               CORE PAGES                      -->
+  <!--       (Highest Priority, Infrequent Edits)    -->
+  <!-- ============================================= -->
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/projects.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/expertise.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/about.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/contact.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/resume.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>quarterly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- ============================================= -->
+  <!--             CONTENT HUB PAGES                 -->
+  <!--      (Medium Priority, Frequent Edits)      -->
+  <!-- ============================================= -->
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/blog.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/contribute.html</loc>
+    <lastmod>2024-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  
+  <!-- ============================================= -->
+  <!--            INDIVIDUAL BLOG POSTS              -->
+  <!--       (Content-Specific, Archived Edits)    -->
+  <!-- ============================================= -->
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/blog-post-1.html</loc>
+    <lastmod>2024-05-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/blog-post-2.html</loc>
+    <lastmod>2024-05-12</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/blog-post-3.html</loc>
+    <lastmod>2024-04-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.abhisheksinghshekhawat.com/blog-post-4.html</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.65</priority>
+  </url>
+  
+</urlset>

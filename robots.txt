@@ -1,0 +1,30 @@
+# ===================================================
+# robots.txt for abhisheksinghshekhawat.com
+# Version 1.0
+#
+# This file provides a comprehensive set of rules for all web crawlers.
+# ===================================================
+
+# Start with a universal rule for all crawlers (*).
+User-agent: *
+
+# By default, nothing is disallowed. This is a "allow-all" starting point.
+Disallow:
+
+# Specifically block crawlers from utility and asset folders.
+# This prevents indexing of non-content files and saves valuable crawl budget.
+Disallow: /assets/
+Disallow: /css/
+Disallow: /js/
+
+# Specifically block crawlers from private or functional pages that should
+# not appear in public search results. This is a critical best practice.
+Disallow: /gallery.html
+Disallow: /thankyou.html
+Disallow: /terms.html
+Disallow: /privacy.html
+Disallow: /disclaimer.html
+
+# Provide the absolute URL to the sitemap. This is the most important
+# directive in this file, acting as a signpost to the official map.
+Sitemap: https://www.abhisheksinghshekhawat.com/sitemap.xml
