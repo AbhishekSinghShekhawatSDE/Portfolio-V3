@@ -1,0 +1,2708 @@
+/* ==========================================================================
+   1. GLOBAL STYLES & CSS VARIABLES
+   ========================================================================== */
+:root {
+    --color-background: #0D0D0D; 
+    --color-surface: #171717;    
+    --color-primary: #3c83f6;   
+    --color-text-primary: #F5F5F5; 
+    --color-text-secondary: #A3A3A3; 
+    --color-border: #262626;     
+    --section-gap-large: 120px;
+    --section-gap-medium: 90px;
+    --border-radius: 12px;
+    --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-family-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    --spacing-xs: 4px; --spacing-s: 8px; --spacing-m: 16px; --spacing-l: 24px; --spacing-xl: 32px; --spacing-xxl: 64px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { 
+    background-color: var(--color-background);
+    color: var(--color-text-primary); 
+    font-family: var(--font-family-sans); 
+    line-height: 1.6; 
+    -webkit-font-smoothing: antialiased; 
+    text-rendering: optimizeLegibility;
+}
+.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 var(--spacing-l); }
+.quantum-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+/* ==========================================================================
+   2. HEADER & NAVIGATION
+   ========================================================================== */
+.main-header { position: fixed; top: var(--spacing-l); left: 50%; transform: translateX(-50%); width: 90%; max-width: 1100px; background-color: rgba(23, 23, 23, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--spacing-m) var(--spacing-l); z-index: 100; transition: transform 0.4s ease-in-out; }
+.main-header.header--hidden { transform: translate(-50%, -150%); }
+.main-header .container { padding: 0 !important; display: flex; justify-content: space-between; align-items: center; }
+.logo.code-style-logo { font-family: var(--font-family-mono); font-size: 1.25rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.logo-code-keyword, .logo-code-bracket, .logo-code-extension { color: var(--color-primary); }
+.logo-code-filename { color: var(--color-text-primary); }
+.header-right-group { display: flex; align-items: center; gap: var(--spacing-xl); }
+.main-nav ul { list-style: none; display: flex; gap: var(--spacing-xl); }
+.main-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: 1rem; font-weight: 500; transition: color 0.3s ease; }
+.main-nav a:hover, .main-nav a.active { color: var(--color-text-primary); }
+.btn-nav-contact { background-color: var(--color-primary); color: white !important; padding: var(--spacing-s) var(--spacing-l); border-radius: var(--border-radius); font-weight: 600; font-size: 1.1rem; transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; white-space: nowrap; }
+.btn-nav-contact:hover { transform: scale(1.05); box-shadow: 0 0 15px #3b82f666; }
+
+/* ==========================================================================
+   3. HERO SECTION with VIDEO BACKGROUND
+   ========================================================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+    overflow: hidden;
+}
+.hero-video-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-video-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 13, 13, 0.6);
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+.hero-profile-pic { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid var(--color-surface); box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: var(--spacing-l); margin-left: auto;
+    margin-right: auto; }
+.hero-name { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: var(--spacing-s); }
+.hero-roles { font-size: 1.25rem; font-weight: 500; color: var(--color-text-primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: var(--spacing-xl); }
+.hero-subtitle { font-size: 1.2rem; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto var(--spacing-xl); }
+.hero-cta { display: flex; justify-content: center; gap: var(--spacing-m); }
+
+/* ==========================================================================
+   4. DIFFERENTIATED INTERACTION THEME
+   ========================================================================== */
+.hero + section { padding-top: var(--section-gap-large); }
+.what-i-do, .tech-stack-section, .featured-projects, .testimonials-section { padding-top: var(--section-gap-medium); padding-bottom: var(--section-gap-medium); }
+.section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: var(--spacing-xxl); }
+.bento-grid, .tech-grid, .project-grid, .testimonials-grid { display: grid; gap: var(--spacing-l); }
+.bento-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.tech-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); max-width: 800px; margin: 0 auto; }
+.project-grid, .testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+.kinetic-card, .inertial-card { background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius); transform-style: preserve-3d; }
+.kinetic-card { transition: transform 0.1s ease-out, box-shadow 0.3s ease-out; }
+.inertial-card { transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease-out; }
+.kinetic-card:hover, .inertial-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 30px rgba(59, 130, 246, 0.2); }
+.bento-item, .project-card, .testimonial-card, .cta-section .container { padding: var(--spacing-xl); }
+.tech-item { padding: var(--spacing-l); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--color-text-secondary); }
+.bento-item svg { width: 32px; height: 32px; color: var(--color-primary); margin-bottom: var(--spacing-m); }
+.bento-item h3 { font-size: 1.25rem; margin-bottom: var(--spacing-s); }
+.project-tags span { background-color: rgba(59, 130, 246, 0.1); color: var(--color-primary); padding: var(--spacing-xs) var(--spacing-s); border-radius: 4px; font-size: 0.8rem; font-weight: 500; margin-right: var(--spacing-s); }
+
+/* ==========================================================================
+   5. CTA, BUTTONS, & UTILITIES
+   ========================================================================== */
+.cta-section { padding-bottom: 0; }
+.cta-section .container { padding: var(--spacing-xxl); text-align: center; }
+.cta-section h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: var(--spacing-m); }
+.cta-section p { max-width: 600px; margin: 0 auto var(--spacing-xl); color: var(--color-text-secondary); font-size: 1.1rem; }
+.btn { position: relative; overflow: hidden; display: inline-block; padding: var(--spacing-m) var(--spacing-xl); border-radius: var(--border-radius); text-decoration: none; font-weight: 600; font-size: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(59, 130, 246, 0.3); }
+.btn-primary { background-color: var(--color-primary); color: var(--color-text-primary); }
+.btn-secondary { background-color: var(--color-surface); color: var(--color-text-primary); border: 1px solid var(--color-border); }
+.ripple { position: absolute; border-radius: 50%; background-color: rgba(255, 255, 255, 0.6); transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none; }
+@keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+.link-arrow { color: var(--color-primary); text-decoration: none; font-weight: 600; display: inline-block; transition: transform 0.3s ease; }
+.link-arrow:hover { text-decoration: underline; transform: translateX(5px); }
+.section-cta { text-align: center; margin-top: var(--spacing-xl); }
+/* Add this to section 5 in your style.css */
+.cta-button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Ensures buttons stack nicely on small screens */
+    gap: var(--spacing-m);
+    margin-top: var(--spacing-xl);
+}
+/* =======================================
+   5.5 --- GLOBAL FORM STYLES (THE FIX)
+   ======================================= */
+.form-group {
+    margin-bottom: var(--spacing-l);
+}
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-s);
+    font-weight: 500;
+}
+.form-group input,
+.form-group textarea,
+.detailed-form select { /* Target the select in the detailed form specifically */
+    width: 100%;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-m);
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.detailed-form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+/* Add this inside section 5.5 for Global Form Styles */
+.form-group select {
+    width: 100%;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-m);
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* The magic to remove default OS styling */
+    -webkit-appearance: none;
+    appearance: none;
+    /* Our custom arrow */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23A3A3A3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233B82F6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* ==========================================================================
+   6. FOOTER & GLOBAL INTERACTIVITY
+   ========================================================================== */
+.main-footer { padding-top: var(--section-gap-medium); padding-bottom: var(--spacing-xl); }
+.main-footer .container { background-color: rgba(23, 23, 23, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--spacing-xl); width: 90%; max-width: 1100px; margin: 0 auto; }
+.footer-content { display: flex; flex-wrap: wrap; gap: var(--spacing-xl); margin-bottom: var(--spacing-xl); }
+.footer-column { flex-grow: 1; min-width: 200px; }
+.footer-about { flex-basis: 30%; flex-shrink: 0; }
+.footer-column h4, .footer-about h4 { font-size: 1rem; color: var(--color-text-primary); margin-bottom: var(--spacing-m); font-weight: 500; }
+.footer-column ul { list-style: none; }
+.footer-column ul li a { display: block; color: var(--color-text-secondary); text-decoration: none; margin-bottom: var(--spacing-s); transition: color 0.3s ease; }
+.footer-column ul li a:hover { color: var(--color-primary); }
+.footer-about p { color: var(--color-text-secondary); }
+.footer-bottom { border-top: 1px solid var(--color-border); padding-top: var(--spacing-l); text-align: center; color: var(--color-text-secondary); font-size: 0.9rem; }
+.fade-in-element { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1); }
+.fade-in-element.visible { opacity: 1; transform: translateY(0); }
+/* Styling for the animated flag emoji in the footer */
+.flag-emoji {
+    display: inline-block; /* Allows transform to work */
+    transition: transform 0.3s ease;
+}
+.footer-about:hover .flag-emoji {
+    transform: scale(1.2) rotate(5deg); /* A subtle pop and tilt on hover */
+}
+/* ==========================================================================
+   WAVING FLAG ANIMATION
+   ========================================================================== */
+.waving-flag {
+    display: inline-block;
+    vertical-align: middle; /* Aligns the flag nicely with the text */
+    height: 16px; /* Control the size of the flag */
+    margin-left: 8px;
+    /* The animation definition */
+    animation: wave-animation 2.5s linear infinite;
+    transform-origin: bottom left; /* The wave will pivot from the "pole" */
+}
+
+@keyframes wave-animation {
+    0% { transform: rotateZ(0deg); }
+    15% { transform: rotateZ(-8deg); }
+    30% { transform: rotateZ(6deg); }
+    45% { transform: rotateZ(-4deg); }
+    60% { transform: rotateZ(2deg); }
+    75% { transform: rotateZ(-1deg); }
+    100% { transform: rotateZ(0deg); }
+}
+.interactive-bg { display: none; }
+@media (hover: hover) and (pointer: fine) { * { cursor: none; } .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(var(--x, 0), var(--y, 0)) translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, background-color 0.2s, border-color 0.2s, width 0.3s, height 0.3s; width: 40px; height: 40px; border: 2px solid var(--color-primary); opacity: 0.5; } .cursor-hover .cursor-outline { transform: translate(var(--x, 0), var(--y, 0)) translate(-50%, -50%) scale(1.5); background-color: rgba(59, 130, 246, 0.1); } .cursor-pressed .cursor-outline { transform: translate(var(--x, 0), var(--y, 0)) translate(-50%, -50%) scale(0.8) !important; } }
+.skip-to-content-link { position: absolute; top: -100px; left: 0; background: var(--color-primary); color: white; padding: var(--spacing-m); z-index: 9999; transition: top 0.3s ease; }
+.skip-to-content-link:focus { top: 0; }
+:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; border-radius: var(--spacing-xs); }
+.btn:focus-visible, .link-arrow:focus-visible, .main-nav a:focus-visible, .btn-nav-contact:focus-visible { outline-offset: 4px; }
+@media (max-width: 768px) { .bento-grid, .project-grid, .testimonials-grid, .tech-grid { grid-template-columns: 1fr; } .hero-title, .page-title { font-size: 2.5rem; } .hero-subtitle, .page-subtitle { font-size: 1rem; } .section-title { font-size: 2rem; } .main-header { max-width: calc(100% - 32px); } .main-nav { display: none; } .main-footer .container { width: 90%; } }
+@media (max-width: 576px) { .footer-column { text-align: center; } }
+@media print { body { background-color: #ffffff; color: #000000; font-family: 'Times New Roman', serif; } .main-header, .quantum-canvas, .cursor-outline, .hero-cta, .btn, .main-footer, .link-arrow, .btn-nav-contact, .hero-video-wrapper { display: none !important; } .container { max-width: 100%; padding: 0; margin: 0; } a { text-decoration: underline; color: #0000ff; } .hero, .what-i-do, .featured-projects, .testimonials-section, .page-hero { padding: 20px 0; } .cta-section .container, .bento-item, .tech-item, .project-card, .testimonial-card { border: 1px solid #ccc; box-shadow: none; transform: none !important; } }
+/* ==========================================================================
+   7. ABOUT PAGE STYLES (CORRECTED)
+   ========================================================================== */
+.page-hero {
+    padding-top: 180px;
+    padding-bottom: var(--section-gap-medium);
+    text-align: center;
+}
+.page-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: var(--spacing-m);
+}
+.page-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.about-content-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: var(--spacing-xxl);
+    align-items: center;
+}
+.section-title-alt {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-l);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--spacing-m);
+    display: inline-block;
+}
+.section-title-alt.small {
+    font-size: 1.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: var(--spacing-l);
+}
+.about-bio p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-m);
+    font-size: 1.1rem;
+}
+.about-profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto var(--spacing-xl);
+    border: 4px solid var(--color-surface);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.quick-facts {
+    padding: var(--spacing-l);
+    width: 100%;
+    max-width: 400px; 
+    margin: 0 auto;
+}
+.quick-facts ul {
+    list-style: none;
+    font-size: 1rem;
+}
+.quick-facts ul li {
+    margin-bottom: var(--spacing-m);
+    display: flex;
+    align-items: center;
+}
+.quick-facts ul li i {
+    color: var(--color-primary);
+    margin-right: var(--spacing-m);
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.quick-facts ul li a.fact-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.quick-facts ul li a.fact-link:hover {
+    color: var(--color-primary);
+}
+
+.education-timeline-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.education-timeline-section .section-title, .what-i-do .section-title, .testimonials-section .section-title {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: fit-content;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--spacing-m);
+}
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: var(--color-surface);
+    border-radius: 2px;
+}
+.timeline-progress-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+    z-index: 2;
+    animation: flow-up 10s linear infinite;
+}
+@keyframes flow-up {
+    from { top: 100%; }
+    to { top: 0%; }
+}
+.timeline-item {
+    padding: var(--spacing-m) var(--spacing-xl);
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+.timeline-item:nth-child(odd) {
+    left: 0;
+    padding-right: var(--spacing-xxl);
+    text-align: right;
+}
+.timeline-item:nth-child(even) {
+    left: 50%;
+    padding-left: var(--spacing-xxl);
+    text-align: left;
+}
+.timeline-checkpoint-dot {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-border);
+    border: 3px solid var(--color-surface);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-checkpoint-dot.activated {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+.timeline-item:nth-child(odd) .timeline-checkpoint-dot {
+    right: -8px;
+}
+.timeline-item:nth-child(even) .timeline-checkpoint-dot {
+    left: -8px;
+}
+.timeline-content {
+    padding: var(--spacing-l);
+}
+.timeline-content h3 { font-size: 1.25rem; }
+.timeline-meta { font-size: 0.9rem; color: var(--color-text-secondary); margin: var(--spacing-s) 0; }
+
+.testimonials-section .testimonials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+.testimonials-section .testimonial-card {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.testimonials-section .author-details {
+    margin-top: var(--spacing-l);
+}
+.testimonials-section .author-name {
+    font-weight: 600;
+}
+.testimonials-section .author-title {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 992px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about-bio .section-title-alt {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media (max-width: 768px) {
+    .timeline { padding-top: 0; padding-bottom: 0; }
+    .timeline-line, .timeline-progress-dot { left: 8px; }
+    .timeline-item { width: 100%; padding-left: var(--spacing-xxl); padding-right: 0; text-align: left !important; }
+    .timeline-checkpoint-dot { left: 0; }
+}
+/* ==========================================================================
+   8. PROJECTS PAGE STYLES (CORRECTED)
+   ========================================================================== */
+.projects-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.project-video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Ensures a consistent shape */
+    background-color: var(--color-background); /* A fallback color */
+    border-bottom: 1px solid var(--color-border);
+}
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+}
+.project-card-item {
+    display: flex;
+    flex-direction: column;
+}
+.project-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom: 1px solid var(--color-border);
+}
+.project-content {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.project-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-s);
+}
+.project-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-l);
+    flex-grow: 1;
+}
+.project-tags {
+    margin-bottom: var(--spacing-l);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+}
+.project-links {
+    display: flex;
+    gap: var(--spacing-l);
+    margin-top: auto;
+}
+
+/* ==========================================================================
+   9. PROJECTS PAGE - CONTRIBUTION CTA (CORRECTED)
+   ========================================================================== */
+.contribution-cta-section {
+    padding-top: var(--section-gap-medium);
+    padding-bottom: var(--section-gap-medium);
+    text-align: center;
+}
+.contribution-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+    text-align: left;
+    align-items: stretch;
+}
+.contribution-card {
+    padding: var(--spacing-xl);
+    /* THIS IS THE FIX: aspect-ratio removed to allow natural height */
+    display: flex;
+    flex-direction: column;
+}
+.contribution-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-m);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+.contribution-card h3 .fas {
+    margin-right: var(--spacing-m);
+}
+.contribution-card p, .contribution-card ul {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    flex-grow: 1;
+}
+.contribution-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: var(--spacing-s);
+}
+.contribution-card ul li {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-s);
+    position: relative;
+    padding-left: var(--spacing-l);
+    font-size: 0.95rem;
+}
+.contribution-card ul li::before {
+    content: '✓';
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+}
+.contribution-footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+}
+.contribution-footer h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-s);
+}
+.contribution-footer p {
+    max-width: 600px;
+    margin: 0 auto var(--spacing-l);
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 992px) {
+    .contribution-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================================================================
+   10. CONTRIBUTE PAGE STYLES (CORRECTED & ENHANCED)
+   ========================================================================== */
+.contribution-intro-section .inertial-card {
+    padding: var(--spacing-xxl);
+}
+.collab-benefits {
+    list-style: none;
+    margin: var(--spacing-xl) 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-l);
+}
+/* Add this new rule for the 2x3 grid layout */
+.collab-benefits.two-by-three {
+    grid-template-columns: 1fr 1fr; /* This creates the 2 columns */
+    margin-top: var(--spacing-l);
+}
+
+.collab-benefits.two-by-three li {
+    padding: var(--spacing-m);
+    flex-direction: column; /* Stack the icon and text vertically */
+    text-align: center;
+}
+
+.collab-benefits.two-by-three li i {
+    margin-right: 0; /* Remove side margin */
+    margin-bottom: var(--spacing-s); /* Add bottom margin */
+}
+.collab-benefits li {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.collab-benefits i {
+    color: var(--color-primary);
+    margin-right: var(--spacing-m);
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+.collab-note {
+    font-style: italic;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-top: var(--spacing-l);
+}
+
+.contribution-form-section .inertial-card {
+    padding: var(--spacing-xxl);
+}
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-l);
+    margin-bottom: var(--spacing-xl);
+}
+.role-card {
+    cursor: pointer;
+    padding: 0; /* Let the content define padding */
+}
+.role-card input[type="checkbox"] {
+    display: none; /* Hide the actual checkbox */
+}
+.role-card-content {
+    padding: var(--spacing-l);
+    text-align: center;
+    height: 100%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.role-card .role-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-m);
+    transition: transform 0.3s ease;
+}
+.role-card .role-title {
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-s);
+}
+.role-card .role-description {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+/* Style for selected card */
+.role-card input[type="checkbox"]:checked + .role-card-content {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+.role-card input[type="checkbox"]:checked + .role-card-content .role-icon {
+    transform: scale(1.1);
+}
+
+.form-personal-details {
+    margin-top: var(--spacing-xxl);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Note: .form-group styles are global and do not need to be repeated */
+
+@media (max-width: 768px) {
+    .collab-benefits {
+        grid-template-columns: 1fr;
+    }
+    .contribution-intro-section .inertial-card,
+    .contribution-form-section .inertial-card {
+        padding: var(--spacing-xl);
+    }
+}
+/* ==========================================================================
+   10. EXPERTISE PAGE STYLES (DEFINITIVE V3)
+   ========================================================================== */
+.expertise-section, .certifications-section, .achievements-section, .why-me-section, .badges-section, .connect-cta-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.page-subtitle#expertise-intro { min-height: 3.5em; } /* Prevent layout shift for typewriter */
+
+/* Skill Deck Styles */
+.skill-deck-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+.skill-deck-card {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 4 / 3;
+}
+.skill-deck-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.proficiency-bar {
+    width: 100%;
+    height: 10px;
+    background-color: var(--color-border);
+    border-radius: 5px;
+    margin-top: var(--spacing-m);
+}
+.proficiency-bar span {
+    display: block;
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+    width: var(--proficiency, 0%);
+    transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.5s;
+}
+
+/* Certifications Styles */
+.section-subtitle-quote {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: calc(-1 * var(--spacing-xl)) auto var(--spacing-xxl);
+}
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    /* This hides any items that overflow the container's max-height */
+    overflow: hidden; 
+    /* THIS IS THE KEY: We set a max-height that only allows the first 3 rows to show */
+    max-height: 1050px; /* Adjust this value if your cards have different heights */
+    transition: max-height 0.8s ease-in-out; /* Animate the expansion */
+}
+.cert-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.cert-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-top-left-radius: var(--border-radius); border-top-right-radius: var(--border-radius); }
+.cert-content { padding: var(--spacing-l); border-top: 1px solid var(--color-border); flex-grow: 1; display: flex; flex-direction: column; }
+.cert-content h3 { font-size: 1.25rem; margin-bottom: var(--spacing-s); }
+.cert-content p { color: var(--color-text-secondary); margin-bottom: var(--spacing-l); flex-grow: 1; }
+.cert-content .link-arrow { margin-top: auto; }
+
+/* Achievements Styles */
+.achievements-section .inertial-card { padding: var(--spacing-xxl); }
+.achievements-list { list-style: none; max-width: 800px; margin: 0 auto; }
+.achievements-list li { font-size: 1.1rem; display: flex; align-items: flex-start; margin-bottom: var(--spacing-l); }
+.achievements-list i { color: var(--color-primary); margin-right: var(--spacing-m); font-size: 1.2rem; margin-top: 4px; }
+.achievements-list strong { color: var(--color-text-primary); }
+
+/* Badges Styles */
+.badges-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--spacing-l); }
+.badge-item { padding: var(--spacing-m); }
+.badge-item img { height: 80px; width: 80px; object-fit: contain;  transition: filter 0.3s ease; }
+.badge-item:hover img { filter: grayscale(0) brightness(1); }
+
+/* Why Me & Connect CTA */
+.why-me-section .inertial-card { padding: var(--spacing-xxl); text-align: center; }
+.why-me-section p { max-width: 700px; margin: 0 auto; font-size: 1.2rem; color: var(--color-text-secondary); }
+.connect-cta-section { text-align: center; }
+.connect-cta-section h3 { font-size: 1.8rem; margin-bottom: var(--spacing-l); }
+.connect-buttons { display: flex; justify-content: center; gap: var(--spacing-m); }
+.connect-buttons .btn i { margin-right: var(--spacing-s); }
+
+/* ==========================================================================
+   11. CONTACT PAGE STYLES (V2 - With Equal Height Columns)
+   ========================================================================== */
+.contact-section {
+    padding-bottom: var(--section-gap-medium);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+    /* align-items: flex-start; <-- REMOVED this line to allow columns to stretch */
+}
+
+.contact-form-wrapper {
+    padding: var(--spacing-xxl);
+}
+
+.contact-form-wrapper .section-title-alt {
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-submit-btn {
+    width: 100%;
+    max-width: 300px;
+    font-size: 1.1rem;
+    padding: var(--spacing-l);
+}
+
+/* === NEW RULES FOR BALANCED LAYOUT === */
+.contact-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l); /* Replaces margin-bottom for cleaner spacing */
+}
+
+.contact-info-card {
+    margin-bottom: 0; /* Remove old margin, replaced by gap */
+    padding: var(--spacing-xl);
+    display: flex; /* Make the card a flex container */
+    flex-direction: column; /* Stack its content vertically */
+    flex-grow: 1; /* CRITICAL: Allows card to grow and fill space */
+}
+/* === END NEW RULES === */
+
+.contact-info-card ul {
+    list-style: none;
+}
+
+.contact-info-card ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-m);
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+.contact-info-card ul li:last-child {
+    margin-bottom: 0;
+}
+
+.contact-info-card ul li i {
+    color: var(--color-primary);
+    margin-right: var(--spacing-m);
+    width: 24px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.contact-info-card ul li a.fact-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin-left: 4px;
+}
+
+.contact-info-card ul li a.fact-link:hover {
+    color: var(--color-primary);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-form-wrapper {
+        padding: var(--spacing-xl);
+    }
+}
+
+/* ==========================================================================
+   12. DUAL CTA BLOCK STYLES
+   ========================================================================== */
+.cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xxl); /* Creates space below the main section title */
+    align-items: stretch; /* Ensures both cards are the same height */
+}
+
+.cta-card {
+    padding: var(--spacing-xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* This is key for aligning the button at the bottom */
+}
+
+.cta-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-m);
+}
+
+.cta-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    flex-grow: 1; /* Allows the paragraph to push the button down */
+    margin-bottom: var(--spacing-xl);
+}
+
+.cta-card .btn {
+    margin-top: auto; /* Pushes the button to the bottom of the card */
+}
+/* Add this new rule to Section 12 in your style.css */
+
+.cta-card .cta-card-title {
+    color: var(--color-text-primary); /* This makes it white */
+    font-size: 1.6rem; /* This makes it slightly bigger */
+    margin-bottom: var(--spacing-m);
+}
+
+/* We should also remove the old h3 rule from this section to avoid conflicts */
+/* Find and remove this old block: */
+.cta-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-primary); /* This was the old blue color */
+    margin-bottom: var(--spacing-m);
+}
+/* Add this rule to your responsive section at the end of the file */
+@media (max-width: 768px) {
+    .cta-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* --- Three-Column CTA Variant --- */
+.cta-grid.cta-grid-three-col {
+    /* On desktop, force 3 columns */
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 992px) {
+    .cta-grid.cta-grid-three-col {
+        /* On tablet, switch to a 2-column layout */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .cta-grid.cta-grid-three-col {
+        /* On mobile, stack to 1 column (this rule already exists but we repeat for clarity) */
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================================================================
+   13. CONTRIBUTE PAGE - V2 (MULTI-SECTION) STYLES
+   ========================================================================== */
+.contribution-section {
+    padding-top: var(--section-gap-medium);
+    padding-bottom: var(--section-gap-medium);
+}
+.contribution-section:first-of-type {
+    padding-top: 0;
+}
+.text-center-card {
+    padding: var(--spacing-xxl);
+    text-align: center;
+}
+.text-center-card p {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-text-secondary);
+}
+
+/* Benefit List Styling */
+.collab-benefits.wide li {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-l);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.collab-benefits.wide li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.collab-benefits.wide li div {
+    margin-left: var(--spacing-m);
+}
+.collab-benefits.wide li p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+}
+
+/* Process Steps Styling */
+.process-steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-l);
+    counter-reset: step-counter;
+}
+.process-steps li {
+    padding: var(--spacing-l);
+    display: flex;
+    align-items: center;
+}
+.process-steps li span {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-right: var(--spacing-l);
+}
+/* Add this new rule for the 4-column layout */
+.process-steps.four-col {
+    grid-template-columns: repeat(4, 1fr);
+}
+/* Add this to your responsive media queries */
+@media (max-width: 992px) {
+    .process-steps.four-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 576px) {
+    .process-steps.four-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Role Examples Styling */
+.roles-grid-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-l);
+}
+.role-example-card {
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+.role-example-card i {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-m);
+}
+.role-example-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-s);
+}
+.role-example-card p {
+    color: var(--color-text-secondary);
+}
+
+/* Detailed Form Styling */
+.detailed-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-l);
+}
+.detailed-form .form-group {
+    margin-bottom: 0; /* Gap handles spacing */
+}
+.detailed-form .form-group:nth-last-child(-n+2) { /* Target full-width items */
+    grid-column: 1 / -1;
+}
+.detailed-form select {
+    width: 100%;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-m);
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233B82F6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+.detailed-form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* FAQ Accordion Styling */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.faq-item {
+    padding: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+}
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.faq-question i {
+    transition: transform 0.3s ease;
+}
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding-top 0.4s ease;
+}
+.faq-answer p {
+    color: var(--color-text-secondary);
+}
+.faq-item.active .faq-answer {
+    padding-top: var(--spacing-m);
+    max-height: 200px; /* Adjust if answers are longer */
+}
+
+/* Responsive Overrides */
+@media(max-width: 768px) {
+    .detailed-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   14. PAST ACTIVITIES SECTION STYLES
+   ========================================================================== */
+.past-activities-section {
+    padding-top: var(--section-gap-medium);
+    padding-bottom: var(--section-gap-medium);
+}
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-l);
+    margin-top: var(--spacing-xxl);
+}
+.activity-card {
+    padding: var(--spacing-xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.activity-card:not(.unavailable):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 20px rgba(59, 130, 246, 0.2);
+}
+.activity-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-m);
+}
+.activity-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-s);
+}
+.activity-status {
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    padding: var(--spacing-xs) var(--spacing-m);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: var(--spacing-l);
+}
+.activity-status.active {
+    background-color: rgba(59, 130, 246, 0.15);
+    color: var(--color-primary);
+}
+.activity-desc {
+    color: var(--color-text-secondary);
+    flex-grow: 1;
+    margin-bottom: var(--spacing-xl);
+}
+.activity-card .btn {
+    margin-top: auto; /* Pushes button to the bottom */
+}
+.btn-disabled {
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: not-allowed;
+}
+/* THIS IS THE KEY STYLING FOR UNAVAILABLE CARDS */
+.activity-card.unavailable {
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+.activity-card.unavailable .activity-icon,
+.activity-card.unavailable .btn-disabled {
+    color: var(--color-text-secondary);
+}
+/* ==========================================================================
+   15. RESUME PAGE STYLES
+   ========================================================================== */
+.resume-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.resume-card {
+    padding: var(--spacing-xxl);
+}
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: var(--spacing-l);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--spacing-xl);
+}
+.resume-header-left h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-s);
+}
+.resume-header-left p {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+.resume-header-right {
+    display: flex;
+    gap: var(--spacing-l);
+    text-align: right;
+}
+.resume-header-right a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+.resume-header-right a:hover {
+    color: var(--color-primary);
+}
+.resume-header-right i {
+    margin-right: var(--spacing-s);
+}
+
+.resume-content-block {
+    margin-bottom: var(--spacing-xl);
+}
+.resume-content-block:last-child {
+    margin-bottom: 0;
+}
+.resume-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--spacing-s);
+    margin-bottom: var(--spacing-l);
+    display: inline-block;
+}
+
+.resume-content-block p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-l);
+}
+.skills-grid h4 {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-s);
+}
+
+/* Experience & Project Entries */
+.experience-entry, .project-entry {
+    margin-bottom: var(--spacing-l);
+}
+.experience-entry:last-child, .project-entry:last-child {
+    margin-bottom: 0;
+}
+.experience-entry h4, .project-entry h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.experience-entry h5 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+.experience-dates {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    font-style: italic;
+    margin-bottom: var(--spacing-m);
+}
+.experience-entry ul {
+    list-style-position: outside;
+    padding-left: var(--spacing-l);
+    color: var(--color-text-secondary);
+}
+.experience-entry ul li {
+    margin-bottom: var(--spacing-s);
+}
+
+@media(max-width: 768px) {
+    .resume-card {
+        padding: var(--spacing-xl);
+    }
+    .resume-header {
+        flex-direction: column;
+        gap: var(--spacing-l);
+    }
+    .resume-header-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-m);
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================================================================
+   16. INTERACTIVE RESUME - FINAL DEFINITIVE STYLES
+   ========================================================================== */
+/* ==========================================================================
+   16. INTERACTIVE RESUME - FINAL DEFINITIVE STYLES (WITH GLOW)
+   ========================================================================== */
+.resume-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+/* The wrapper handles positioning and triggers the hover effects */
+.resume-wrapper {
+    max-width: 850px;
+    margin: 0 auto;
+    /* It inherits the .inertial-card tilt effect from the global JS */
+}
+
+/* The inner paper handles its appearance and load animation */
+.resume-paper-v3 {
+    background-color: #fdfdfd; 
+    color: #171717;
+    border-radius: 8px;
+    padding: var(--spacing-xxl);
+    transform-origin: top center;
+    opacity: 0;
+    
+    /* The slide-down animation */
+    animation: slideDownFadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+
+    /* Base shadow on the paper */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: box-shadow 0.4s ease; /* Add transition for the shadow change */
+}
+
+/*
+   THIS IS THE CRITICAL FIX:
+   When the wrapper is hovered, we change the box-shadow OF THE INNER PAPER
+   to include the blue glow.
+*/
+.resume-wrapper:hover .resume-paper-v3 {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 35px rgba(59, 130, 246, 0.3);
+}
+
+
+@keyframes slideDownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#resume-end-trigger {
+    height: 1px;
+}
+
+/* --- New Professional Layout --- */
+.resume-v2-header { text-align: center; border-bottom: 2px solid #ddd; padding-bottom: var(--spacing-l); margin-bottom: var(--spacing-l); }
+.resume-v2-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #111; }
+.resume-v2-header p { font-size: 1.1rem; color: #555; }
+.resume-v2-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-m); margin-top: var(--spacing-m); font-size: 0.9rem; }
+.resume-v2-contact a { color: var(--color-primary); text-decoration: none; }
+.resume-v2-contact a:hover { text-decoration: underline; }
+.resume-v2-contact i { margin-right: var(--spacing-xs); }
+
+.resume-v2-body { padding-top: var(--spacing-l); }
+.resume-v2-section { margin-bottom: var(--spacing-l); }
+.resume-v2-title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #333; border-bottom: 1px solid #ccc; padding-bottom: var(--spacing-xs); margin-bottom: var(--spacing-m); }
+
+.resume-v2-entry { margin-bottom: var(--spacing-m); }
+.entry-header { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: var(--spacing-xs); }
+.entry-header h3 { font-size: 1rem; }
+.entry-header span { font-style: italic; color: #555; }
+.resume-v2-entry p { margin-bottom: var(--spacing-s); line-height: 1.6; }
+.resume-v2-entry ul { list-style-type: disc; padding-left: var(--spacing-l); line-height: 1.6; }
+
+.skills-v2-category p { margin-bottom: var(--spacing-s); }
+.skills-v2-category strong { display: inline-block; width: 140px; }
+/* ==========================================================================
+   17. THANK YOU PAGE STYLES
+   ========================================================================== */
+.thank-you-card {
+    padding: var(--spacing-xxl);
+    text-align: center;
+}
+
+.thank-you-icon {
+    font-size: 4rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-l);
+    animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* ==========================================================================
+   18. GALLERY PAGE - DEFINITIVE STYLES (SINGLE-COLUMN)
+   ========================================================================== */
+.gallery-teaser-section, .gallery-auth-section {
+    padding-bottom: var(--section-gap-medium);
+}
+
+/* This styles the container-less teaser text */
+.gallery-teaser-section .text-center-card {
+    padding: 0; /* Remove default card padding */
+}
+.gallery-teaser-section .text-center-card p {
+    font-size: 1.2rem;
+    max-width: 650px;
+}
+.gallery-teaser-section .text-center-card h2 {
+    border-bottom: none; /* Remove the underline from the title */
+}
+
+/* Auth Card and Form Styling */
+.gallery-login-card {
+    padding: var(--spacing-xl);
+    max-width: 700px; /* Constrain width on large screens */
+    margin: 0 auto;
+}
+.auth-card-header { text-align: center; margin-bottom: var(--spacing-xl); }
+.auth-card-title { font-size: 1.5rem; margin-bottom: var(--spacing-s); }
+.auth-card-subtitle { color: var(--color-text-secondary); max-width: 350px; margin: 0 auto; }
+.auth-switcher { display: flex; border-bottom: 1px solid var(--color-border); margin-bottom: var(--spacing-l); flex-shrink: 0; }
+.auth-switcher button { flex-grow: 1; background: none; border: none; color: var(--color-text-secondary); padding: var(--spacing-m) 0; font-size: 1.1rem; font-weight: 500; cursor: pointer; position: relative; }
+.auth-switcher button::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background-color: var(--color-primary); transform: scaleX(0); transition: transform 0.3s ease; }
+.auth-switcher button.active { color: var(--color-text-primary); }
+.auth-switcher button.active::after { transform: scaleX(1); }
+
+.auth-form { animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Styling for comprehensive registration form */
+.form-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-m);
+    padding-bottom: var(--spacing-s);
+    border-bottom: 1px solid var(--color-border);
+}
+.form-section-title small {
+    font-weight: 400;
+    text-transform: none;
+    color: #888;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-s);
+    margin-bottom: var(--spacing-l);
+}
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    accent-color: var(--color-primary);
+}
+.checkbox-group label {
+    margin-bottom: 0;
+    font-weight: 400;
+}
+.checkbox-group label a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+.checkbox-group label a:hover {
+    text-decoration: underline;
+}
+/* Styling for the phone number input with country code */
+.phone-group .phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.phone-group .phone-input-wrapper:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+.phone-group .country-code {
+    padding: var(--spacing-m);
+    color: var(--color-text-secondary);
+    border-right: 1px solid var(--color-border);
+}
+.phone-group input[type="tel"] {
+    border: none;
+    box-shadow: none;
+    background: none;
+    flex-grow: 1;
+}
+.phone-group input[type="tel"]:focus {
+    box-shadow: none; /* Prevent double shadow */
+}
+/* ==========================================================================
+   19. FULL GALLERY PAGE STYLES
+   ========================================================================== */
+.gallery-auth-section { display: flex; justify-content: center; padding-bottom: var(--section-gap-medium); }
+.gallery-auth-card { padding: var(--spacing-xxl); width: 100%; max-width: 500px; }
+.auth-switcher { display: flex; border-bottom: 1px solid var(--color-border); margin-bottom: var(--spacing-xl); }
+.auth-switcher button { flex-grow: 1; background: none; border: none; color: var(--color-text-secondary); padding: var(--spacing-m) 0; font-size: 1.1rem; font-weight: 500; cursor: pointer; position: relative; }
+.auth-switcher button::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background-color: var(--color-primary); transform: scaleX(0); transition: transform 0.3s ease; }
+.auth-switcher button.active { color: var(--color-text-primary); }
+.auth-switcher button.active::after { transform: scaleX(1); }
+.gallery-auth-card h3 { text-align: center; margin-bottom: var(--spacing-l); }
+.gallery-auth-card select { width: 100%; background-color: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--spacing-m); color: var(--color-text-primary); }
+
+.gallery-section { padding-bottom: var(--section-gap-medium); }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-l); }
+.gallery-item { position: relative; overflow: hidden; aspect-ratio: 4 / 5; cursor: pointer; }
+.gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.gallery-item:hover img, .gallery-item:hover video { transform: scale(1.1); }
+.gallery-item.video-item::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); opacity: 1; transition: opacity 0.3s ease; }
+.gallery-item.video-item:hover::after { opacity: 0; }
+.play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: white; text-shadow: 0 0 10px black; pointer-events: none; }
+.vlog-title { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; padding: var(--spacing-l); font-weight: 600; }
+
+/* Modal Styles */
+.gallery-modal { display: none; position: fixed; z-index: 1000; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; }
+.close-modal-btn { position: absolute; top: 20px; right: 40px; color: white; font-size: 3rem; font-weight: bold; cursor: pointer; }
+.modal-content { max-width: 90vw; max-height: 90vh; }
+.modal-content img, .modal-content video { width: 100%; height: auto; max-height: 90vh; object-fit: contain; }
+/* Responsive Overrides */
+@media(max-width: 992px) {
+    .gallery-gate-grid { grid-template-columns: 1fr; gap: var(--spacing-xl); }
+    .gallery-teaser-content { text-align: center; }
+    .gallery-teaser-content ul li { justify-content: center; }
+}
+/* ==========================================================================
+   20. BLOG PAGE STYLES
+   ========================================================================== */
+.blog-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+}
+.blog-post-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Ensures image corners are rounded */
+}
+.blog-post-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+.blog-post-content {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content to fill space */
+}
+.blog-post-meta {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-s);
+}
+.blog-post-meta span {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+.blog-post-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-s);
+}
+.blog-post-excerpt {
+    color: var(--color-text-secondary);
+    flex-grow: 1; /* Pushes the 'Read More' link down */
+    margin-bottom: var(--spacing-l);
+}
+.blog-post-content .link-arrow {
+    margin-top: auto; /* Aligns the link to the bottom */
+
+}
+
+/* ==========================================================================
+   21. FEATURED PROJECT CARD STYLES (HOMEPAGE)
+   ========================================================================== */
+.featured-projects .project-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto; /* Let content define row height */
+}
+.project-card-link {
+    text-decoration: none; /* Remove underline from the link wrapper */
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Important for rounding image corners */
+}
+.project-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-bottom: 1px solid var(--color-border);
+}
+.project-card-content {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Ensures cards are same height if descriptions differ */
+}
+.project-card-content h4 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-s);
+}
+.project-card-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-l);
+    flex-grow: 1; /* Pushes tags to the bottom */
+}
+.project-tags a {
+    display: inline-block; /* Makes it behave like a button */
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--color-primary);
+    padding: var(--spacing-s) var(--spacing-l); /* A bit more padding for a better click target */
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-tags a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
+}
+/* You already have styles for .project-tags span, they will apply automatically */
+
+@media (max-width: 768px) {
+    .featured-projects .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   22. BADGES SECTION STYLES (DEFINITIVE)
+   ========================================================================== */
+.badges-section .badges-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Responsive columns */
+    gap: var(--spacing-l);
+    align-items: stretch; /* CRITICAL: This makes all cards in a row the same height */
+}
+
+.badge-item {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    text-align: center;
+    padding: var(--spacing-l);
+    /* The inertial-card class handles the background, border, and hover effects */
+}
+
+.badge-item img {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+    margin: 0 auto var(--spacing-m);
+    /* The filter has been removed to show default colors */
+    transition: transform 0.3s ease;
+}
+
+.badge-item:hover img {
+    transform: scale(1.1); /* This zooms the image on hover */
+}
+
+.badge-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.badge-issuer {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-l);
+    flex-grow: 1; /* KEY: Pushes the link to the bottom, filling available space */
+}
+
+.badge-item .link-arrow {
+    margin-top: auto; /* Aligns link to the very bottom of the card */
+}
+
+/* ==========================================================================
+   23. ACHIEVEMENTS SECTION (16:9 ASPECT RATIO)
+   ========================================================================== */
+.achievements-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.achievements-grid-16-9 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-l);
+}
+
+.achievement-card-16-9 {
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    padding: var(--spacing-l);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    color: var(--color-text-primary);
+}
+
+.achievement-card-16-9::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.9) 100%);
+    transition: background-color 0.4s ease;
+    border-radius: inherit;
+}
+
+.achievement-card-16-9:hover::before {
+    background-color: rgba(13, 13, 13, 0.4);
+}
+
+.achievement-content-overlay {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+}
+
+/* We must re-add the styles for the content since the structure changed */
+.achievement-content-overlay .achievement-content .achievement-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-s);
+}
+
+.achievement-content-overlay .achievement-content .achievement-desc {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+/* ==========================================================================
+   24. TOOLS & PLATFORMS (1:1 IMAGE-BASED) STYLES
+   ========================================================================== */
+.tools-grid-1-1 {
+    display: grid;
+    /* Creates a responsive grid of squares */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-l);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tool-card-1-1 {
+    /* The 1:1 Aspect Ratio */
+    aspect-ratio: 1 / 1;
+    
+    padding: var(--spacing-l);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    /* The .inertial-card class handles background, border, and hover */
+    overflow: hidden;
+}
+
+.tool-card-1-1 img {
+    width: 60%; /* Controls the size of the logo inside the card */
+    height: 60%;
+    object-fit: contain;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+     /* Makes logos white-ish */
+}
+
+.tool-name-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(59, 130, 246, 0.9); /* Primary blue overlay */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    
+    /* Start hidden */
+    opacity: 0;
+    transform: scale(0.9);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* The Hover Effect */
+.tool-card-1-1:hover img {
+    transform: scale(0.8);
+    opacity: 0.3;
+}
+
+.tool-card-1-1:hover .tool-name-overlay {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* ==========================================================================
+   25. CERTIFICATION EXPANDER STYLES
+   ========================================================================== */
+
+
+/* This is the magic rule: when the grid has the .is-expanded class... */
+.certifications-grid.is-expanded {
+    max-height: 5000px; /* A large value to ensure all cards can fit */
+}
+
+.expand-cta {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+
+/* Hide the button after it has been clicked */
+.certifications-grid.is-expanded + .expand-cta {
+    display: none;
+}
+/* ==========================================================================
+   26. CAPABILITIES OVERVIEW STYLES
+   ========================================================================== */
+.capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-l);
+    max-width: 1100px; /* Or your container max-width */
+    margin: 0 auto;
+}
+
+.capability-card {
+    display: flex;
+    align-items: flex-start; /* Aligns icon and text block at the top */
+    padding: var(--spacing-l);
+    /* .inertial-card handles the background, border, and hover effects */
+}
+
+.capability-icon {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-right: var(--spacing-l);
+    margin-top: 4px; /* Fine-tune vertical alignment */
+}
+
+.capability-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-s);
+}
+
+.capability-content p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+/* ==========================================================================
+   27. VISUAL SKILLS GRID (SVG VERSION)
+   ========================================================================== */
+.skills-grid-visual {
+    display: grid;
+    /* On large screens, we force a 5-column layout */
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-l);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.skill-card-glass {
+    /* Glassmorphism Effect */
+    background: rgba(38, 38, 38, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    
+    /* Layout */
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    aspect-ratio: 1 / 1;
+    
+    /* Interaction */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.skill-card-glass:hover {
+    transform: translateY(-8px);
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.skill-card-glass svg {
+    height: 48px;
+    width: 48px;
+    margin-bottom: var(--spacing-m);
+    /* This makes the SVG inherit the text color */
+    fill: currentColor;
+    color: var(--color-text-primary);
+    opacity: 0.8;
+}
+
+.skill-card-glass h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-text-primary);
+}
+
+/* Responsive adjustments for the grid */
+@media (max-width: 992px) {
+    .skills-grid-visual {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .skills-grid-visual {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 576px) {
+    .skills-grid-visual {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* ==========================================================================
+   28. CORE COMPETENCIES SECTION STYLES
+   ========================================================================== */
+.competency-grid {
+    display: grid;
+    /* On desktop, a 2-column layout looks best for this detail level */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-l);
+    max-width: 900px; /* Constrain width for better readability */
+    margin: 0 auto;
+}
+
+.competency-card {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    /* .inertial-card handles background, border, and hover effects */
+}
+
+.competency-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-m);
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+}
+
+.competency-card h3 i {
+    margin-right: var(--spacing-m);
+    font-size: 1.5rem;
+}
+
+.competency-desc {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    flex-grow: 1; /* This is key to push the keywords to the bottom */
+    margin-bottom: var(--spacing-l);
+}
+
+.competency-keywords {
+    margin-top: auto; /* Pushes the keywords to the bottom */
+    line-height: 1.8;
+}
+
+.competency-keywords span {
+    display: inline-block;
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    padding: var(--spacing-xs) var(--spacing-s);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 4px 4px 4px 0;
+}
+/* ==========================================================================
+   29. SINGLE BLOG POST LAYOUT STYLES
+   ========================================================================== */
+.blog-post-layout {
+    /* THIS IS THE KEY FIX: Ensures space between the header and article */
+    padding-top: var(--section-gap-large);
+    padding-bottom: var(--section-gap-large);
+}
+
+.blog-post-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px; /* Main content and a fixed-width sidebar */
+    gap: var(--spacing-xxl);
+}
+/* Add this to Section 29 */
+.author-info {
+    overflow: hidden; /* This is a common trick to contain floated elements */
+}
+.author-info strong {
+    display: block;
+    font-size: 1.1rem;
+}
+.author-info span {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+.blog-post-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.blog-post-article-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+}
+
+.blog-post-figure {
+    margin: 0 0 var(--spacing-xl);
+}
+
+.blog-post-figure img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-s);
+}
+
+.blog-post-figure figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* Typography and content styling for the article body */
+.blog-post-body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.blog-post-body h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: var(--spacing-xl) 0 var(--spacing-m);
+    padding-top: var(--spacing-l);
+    border-top: 1px solid var(--color-border);
+}
+
+.blog-post-body h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: var(--spacing-l) 0 var(--spacing-m);
+}
+
+.blog-post-body p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-l);
+}
+
+.blog-post-body a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+.blog-post-body a:hover {
+    text-decoration: underline;
+}
+
+.blog-post-body blockquote {
+    border-left: 4px solid var(--color-primary);
+    padding-left: var(--spacing-l);
+    margin: var(--spacing-xl) 0;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-text-primary);
+}
+
+.blog-post-body ul {
+    list-style-position: outside;
+    padding-left: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+    color: var(--color-text-secondary);
+}
+.blog-post-body ul li {
+    margin-bottom: var(--spacing-s);
+}
+
+/* Sidebar Styling */
+.blog-post-sidebar .sidebar-widget {
+    padding: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+}
+
+.sidebar-widget h4 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-m);
+}
+
+.author-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    float: left;
+    margin-right: var(--spacing-m);
+    margin-bottom: var(--spacing-xs);
+}
+
+.recent-posts-list {
+    list-style: none;
+}
+
+.recent-posts-list li {
+    margin-bottom: var(--spacing-s);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-s);
+}
+.recent-posts-list li:last-child {
+    border-bottom: none;
+}
+
+.recent-posts-list a {
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.recent-posts-list a:hover {
+    color: var(--color-primary);
+}
+
+.recent-posts-list a.active-post {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Responsive override for the blog post layout */
+@media (max-width: 992px) {
+    .blog-post-grid {
+        grid-template-columns: 1fr;
+    }
+    .blog-post-sidebar {
+        margin-top: var(--section-gap-medium);
+    }
+}
+/* ==========================================================================
+   LEGAL PAGE STYLES (TERMS, PRIVACY, DISCLAIMER)
+   ========================================================================== */
+.legal-content-section {
+    padding-bottom: var(--section-gap-large);
+}
+.legal-intro {
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xxl);
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.legal-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-m);
+    padding-top: var(--spacing-l);
+    border-top: 1px solid var(--color-border);
+}
+.legal-content-section .inertial-card > .legal-heading:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+.legal-content-section p, .legal-content-section ul {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-m);
+}
+.legal-content-section ul {
+    list-style-position: inside;
+    padding-left: var(--spacing-s);
+}
+/* Styling for the new legal links in the footer */
+.footer-legal-nav {
+    margin-top: var(--spacing-s);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows links to stack on small screens */
+    gap: var(--spacing-l);
+    font-size: 0.8rem;
+}
+.footer-legal-nav a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer-legal-nav a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+/* ==========================================================================
+   29. PHOTO CAROUSEL STYLES
+   ========================================================================== */
+.photo-carousel-container {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--spacing-l) 0;
+    margin-bottom: var(--spacing-xxl);
+    /* The mask creates a nice fade effect on the left and right edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.photo-carousel {
+    display: flex;
+    width: fit-content;
+    /* Adjust animation duration based on number of images. More images = longer duration */
+    animation: scroll-photos 60s linear infinite;
+}
+
+@keyframes scroll-photos {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Move the carousel by the width of the first set of photos */
+        transform: translateX(-50%);
+    }
+}
+
+.photo-item {
+    padding: 0 var(--spacing-m);
+    flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.photo-item img {
+    /* Set a fixed height and let aspect-ratio handle the width */
+    height: 180px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effects */
+.photo-carousel-container:hover .photo-carousel {
+    animation-play-state: paused; /* Pause animation on hover */
+}
+
+.photo-item:hover img {
+    transform: scale(1.05) translateY(-5px); /* Zoom and lift */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+/* Add these new rules for the hover text overlay */
+.photo-item {
+    position: relative; /* This is crucial for positioning the overlay */
+}
+
+.photo-item::after {
+    /* Get the text from our new data-title attribute */
+    content: attr(data-title);
+    
+    /* Positioning */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    /* Styling */
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: var(--spacing-l) var(--spacing-m) var(--spacing-m);
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    
+    /* Animation: Start hidden and fade in on hover */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none; /* Make sure it doesn't interfere with the mouse */
+}
+
+/* When we hover the photo-item, make the ::after overlay visible */
+.photo-item:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ==========================================================================
+   30. GITHUB CHART STYLES (DEFINITIVE)
+   ========================================================================== */
+.github-activity-section {
+    padding-bottom: var(--section-gap-medium);
+}
+.calendar-wrapper {
+    max-width: 800px; /* Or adjust to your preference */
+    margin: 0 auto;
+    padding: var(--spacing-l);
+    /* The .inertial-card class provides the background, border, and hover effects */
+}
+.calendar-wrapper a {
+    display: block; /* Make the link a block to contain the image */
+}
+.calendar-wrapper img {
+    width: 100%;
+    height: auto;
+    /* This makes the green squares blend with our dark theme */
+    filter: invert(1) hue-rotate(180deg);
+    mix-blend-mode: screen; /* Creates a very cool blend effect */
+}
+/* ==========================================================================
+   31. TECH STACK (DEFINITIVE VIBRATORY MOTION)
+   ========================================================================== */
+
+/* Keyframes remain the same */
+@keyframes to-fro-motion-1 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes to-fro-motion-2 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+}
+
+/* Base style for the tech items */
+.tech-item {
+    padding: var(--spacing-l) var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: rgba(38, 38, 38, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tech-item span {
+    display: inline-block; /* Allows transform to work on the span */
+    transition: transform 0.3s ease;
+}
+
+/* Apply the unique animations */
+.tech-grid .tech-item:nth-child(4n+1) { animation: to-fro-motion-1 4s ease-in-out infinite alternate; }
+.tech-grid .tech-item:nth-child(4n+2) { animation: to-fro-motion-2 5s ease-in-out infinite alternate; }
+.tech-grid .tech-item:nth-child(4n+3) { animation: to-fro-motion-1 3.5s ease-in-out infinite alternate-reverse; }
+.tech-grid .tech-item:nth-child(4n+4) { animation: to-fro-motion-2 4.5s ease-in-out infinite alternate-reverse; }
+
+
+/* --- THE DEFINITIVE HOVER FIX --- */
+.tech-item:hover {
+    /* On hover, we ONLY pause the parent's animation and change its appearance */
+    animation-play-state: paused;
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+    color: var(--color-text-primary);
+    z-index: 10;
+}
+
+.tech-item:hover span {
+    /* We apply the scale effect to the CHILD span, which has no competing animation */
+    transform: scale(1.1);
+}
+/* ==========================================================================
+   32. PROFILE PICTURE HOVER EFFECT
+   ========================================================================== */
+.profile-pic-container {
+    position: relative; /* Crucial for positioning the overlay */
+    overflow: hidden; /* Hide the overlay when it's outside the circle */
+}
+/* The hero and about page profile pics already have size and border-radius */
+
+.profile-pic-base {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-pic-hover {
+    position: absolute;
+    inset: 0; /* Cover the container perfectly */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Start hidden above the container */
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.profile-pic-hover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* The text overlay on the hover image */
+.profile-pic-hover span {
+    position: absolute;
+    bottom: 10%;
+    background-color: rgba(13, 13, 13, 0.7);
+    color: white;
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* The hover trigger */
+.profile-pic-container:hover .profile-pic-hover {
+    /* On hover, slide the overlay down into view */
+    transform: translateY(0);
+}
+/* ==========================================================================
+   UTILITY FOR TEXT HIGHLIGHTING
+   ========================================================================== */
+.text-highlight {
+    color: var(--color-primary);
+    font-weight: 500; /* A slightly bolder weight to make it stand out */
+}
+/* Styling for the new 2-column objective/benefits section */
+.side-by-side-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: stretch;
+}
+.collab-benefits.single-col {
+    grid-template-columns: 1fr; /* Override the 2-column default */
+    margin: 0;
+}
+.collab-benefits.single-col li {
+    padding: var(--spacing-m); /* Slightly less padding to fit */
+}
+/* Responsive override */
+@media (max-width: 992px) {
+    .side-by-side-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Add this for the 4-column CTA */
+.cta-grid.cta-grid-four-col {
+    grid-template-columns: repeat(4, 1fr);
+}
+/* You can add responsive overrides for this as well */
+/* ==========================================================================
+   BENEFITS GRID STYLES (DEFINITIVE)
+   ========================================================================== */
+.benefits-grid {
+    display: grid;
+    /* A responsive 3-column grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-l);
+}
+
+.benefit-card {
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+.benefit-card i {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-m);
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-s);
+}
+
+.benefit-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   FINAL RESPONSIVE & CROSS-BROWSER ARCHITECTURE
+   ========================================================================== */
+
+/* --- Universal Animation & Browser Fixes --- */
+.waving-flag {
+    -webkit-animation: wave-animation 2.5s linear infinite;
+    animation: wave-animation 2.5s linear infinite;
+    transform-origin: bottom left;
+}
+@-webkit-keyframes wave-animation {
+    0%, 100% { -webkit-transform: rotateZ(0deg); } 15% { -webkit-transform: rotateZ(-8deg); }
+    30% { -webkit-transform: rotateZ(6deg); }   45% { -webkit-transform: rotateZ(-4deg); }
+    60% { -webkit-transform: rotateZ(2deg); }   75% { -webkit-transform: rotateZ(-1deg); }
+}
+.main-header, .main-footer .container, .skill-card-glass, .tech-item, .gallery-modal, .mobile-menu {
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* --- Mobile Menu Base Architecture (Hidden on Desktop) --- */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 28px;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1002;
+}
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background-color: var(--color-text-primary);
+    border-radius: 3px;
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.mobile-menu {
+    position: fixed; top: 0; right: 0; width: 100%; max-width: 320px; height: 100vh;
+    background-color: rgba(23, 23, 23, 0.9); backdrop-filter: blur(15px);
+    border-left: 1px solid var(--color-border); z-index: 1001;
+    display: flex; flex-direction: column; padding: 80px 32px 40px;
+    transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.mobile-nav { flex-grow: 1; overflow-y: auto; }
+.mobile-nav ul { list-style: none; }
+.mobile-nav ul li a { display: block; color: var(--color-text-primary); text-decoration: none; font-size: 1.5rem; font-weight: 600; padding: 12px 0; }
+.mobile-menu-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--color-border); }
+.mobile-menu-footer .btn { width: 100%; text-align: center; padding: 16px; }
+
+/* --- Active Menu State --- */
+body.mobile-menu-open { overflow: hidden; }
+.mobile-menu-open .mobile-menu { transform: translateX(0); box-shadow: -10px 0 50px rgba(0,0,0,0.5); }
+.mobile-menu-open .mobile-menu-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.mobile-menu-open .mobile-menu-toggle span:nth-child(2) { opacity: 0; }
+.mobile-menu-open .mobile-menu-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.mobile-menu-open .mobile-menu-toggle span { background-color: var(--color-primary); }
+
+/* ==========================================================================
+   BREAKPOINTS: Apply mobile/tablet styles BELOW this line
+   ========================================================================== */
+
+/* --- Tablet Breakpoint (992px) --- */
+@media (max-width: 992px) {
+    .main-nav, .btn-nav-contact { display: none; }
+    .mobile-menu-toggle { display: block; }
+    
+    .about-grid, .contact-grid, .blog-post-grid { grid-template-columns: 1fr; }
+    .projects-grid, .cta-grid.cta-grid-three-col, .achievements-grid-16-9, .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .blog-post-sidebar { margin-top: var(--section-gap-medium); }
+    .skills-grid-visual { grid-template-columns: repeat(4, 1fr); }
+    .activity-grid, .cta-grid.cta-grid-four-col { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* --- Mobile Breakpoint (768px) --- */
+@media (max-width: 768px) {
+    body { -webkit-tap-highlight-color: transparent; }
+    * { cursor: default !important; }
+    .cursor-outline { display: none !important; }
+
+    .hero { padding-top: 120px; min-height: auto; }
+    .hero-profile-pic { width: 140px; height: 140px; }
+    .hero-name, .page-title { font-size: clamp(2rem, 10vw, 2.8rem); }
+    .section-title { font-size: 1.8rem; margin-bottom: var(--spacing-l); }
+    .page-subtitle { font-size: 1.1rem; }
+    .main-header { width: calc(100% - 32px); top: 12px; }
+
+    .projects-grid, .cta-grid, .cta-grid.cta-grid-three-col, .achievements-grid-16-9, .benefits-grid, .footer-content, .bento-grid, .testimonials-grid, .activity-grid, .cta-grid.cta-grid-four-col { grid-template-columns: 1fr !important; }
+    .footer-column { text-align: center; }
+    .skills-grid-visual { grid-template-columns: repeat(3, 1fr); }
+
+    /* Timeline Mobile Fix */
+    .timeline { padding: 0; }
+    .timeline-line { left: 12px; }
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        display: flex;
+        padding: 16px 16px 16px 48px;
+    }
+    .timeline-item .timeline-content { flex-grow: 1; }
+    .timeline-checkpoint-dot { left: 4px; background-color: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+    .timeline-item:nth-child(odd) .timeline-checkpoint-dot, .timeline-item:nth-child(even) .timeline-checkpoint-dot { right: auto; left: 4px; }
+    .timeline-progress-dot { display: none; }
+
+    /* Quick Facts List Fix */
+    .quick-facts ul li { align-items: flex-start; text-align: left; }
+    /* ---- TASK 1: RESUME MOBILE VIEW FIX ---- */
+
+.resume-wrapper {
+    display: none; /* Hides the interactive paper resume on mobile */
+}
+
+/* This adds a message telling mobile users why it's hidden */
+.resume-section .page-hero::after {
+    content: "The interactive resume is best viewed on a desktop device. Please use the download button above.";
+    display: block;
+    margin-top: 40px;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
+/* --- Small Mobile Phone Breakpoint (576px) --- */
+@media (max-width: 576px) {
+    .skills-grid-visual { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Extra Small Mobile Phone Breakpoint (480px) --- */
+@media (max-width: 480px) {
+    .container { padding: 0 var(--spacing-m); }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .hero-cta .btn { width: 100%; max-width: 280px; text-align: center; }
+    .contact-form-wrapper, .contribution-form-section .inertial-card, .gallery-login-card { padding: var(--spacing-xl); }
+    .detailed-form .form-grid { grid-template-columns: 1fr; }
+}
